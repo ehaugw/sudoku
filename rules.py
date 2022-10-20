@@ -10,13 +10,13 @@ def get_groups(row, col, direction):
         for r in range(start_r, start_r + 3):
             out = out.union([(r, c) for c in range(start_c, start_c + 3)])
 
-    return list(out)
+    return out
 
 
 def get_affecting(row, col):
     out = set()
     for direction in ("row", "col", "sqr"):
         out = out.union(get_groups(row, col, direction))
-    out = out.difference(set([(row, col)]))
-    return list(out)
+    out -= {(row, col)}
+    return out
 
